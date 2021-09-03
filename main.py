@@ -1,4 +1,4 @@
-import pyttsx3 #pip install pyttsx3
+import pyttsx3 
 import speech_recognition as sr #pip install speechRecognition
 import datetime
 import wikipedia #pip install wikipedia
@@ -36,7 +36,7 @@ def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.pause_threshold = 1
+        r.adjust_for_ambient_noise(source, duration=1)
         audio = r.listen(source)
 
     try:
@@ -44,12 +44,12 @@ def takeCommand():
         query = r.recognize_google(audio, language='en-in')
         print(f"User said: {query}\n")
 
+		
     except Exception as e:
         # print(e)    
         print("Say that again please...")  
         return "None"
     return query
-
 
 if __name__ == "__main__":
     wishMe()
@@ -90,4 +90,7 @@ if __name__ == "__main__":
             codePath = "C:\\Users\\Haris\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
 
-          
+        ch = input("Do you want to continue=")
+		
+        if(ch.lower()!="yes"):
+            break
